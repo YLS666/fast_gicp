@@ -3,7 +3,7 @@ project(fast_gicp)
 
 option(BUILD_VGICP_CUDA "Build GPU-powered VGICP" OFF)
 option(BUILD_apps "Build application programs" ON)
-option(BUILD_test "Build test programs" OFF)
+option(BUILD_test "Build test programs" ON)
 option(BUILD_PYTHON_BINDINGS "Build python bindings" OFF)
 
 set(CMAKE_BUILD_TYPE "Release")
@@ -182,6 +182,20 @@ elseif (ament_cmake_FOUND)
   ##################################
   ament_export_include_directories(include)
   ament_export_libraries(fast_gicp)
+  
+  # 添加这些行以安装执行程序
+  if(BUILD_apps)
+    install(TARGETS gicp_align gicp_kitti
+      RUNTIME DESTINATION lib/${PROJECT_NAME}
+    )
+  endif()
+  
+  if(BUILD_test)
+    install(TARGETS gicp_test
+      RUNTIME DESTINATION lib/${PROJECT_NAME}
+    )
+  endif()
+  
   ament_package()
 
   install(TARGETS ${PROJECT_NAME}
