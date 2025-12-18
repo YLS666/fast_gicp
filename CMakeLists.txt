@@ -206,3 +206,12 @@ elseif (ament_cmake_FOUND)
       DESTINATION include
     )
 endif()
+ 
+
+
+###### 编译注意事项 ######
+# 需要生成clangd 的 compile_commands.json 文件，在cmake命令后添加 -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+# 例如：
+# colcon build --cmake-args -DCMAKE_EXPORT_COMPILE_COMMANDS=ON 
+# 然后在 build/fast_gicp 目录下会生成 compile_commands.json 文件
+########################
